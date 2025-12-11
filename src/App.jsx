@@ -2,6 +2,7 @@ import Navbar from "./components/NavBar"
 import HomePage from "./home/home"
 import { Routes, Route } from 'react-router-dom'
 import { SignIn, SignUp } from '@clerk/clerk-react'
+import Pipline from "./pipline/pipline"
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
             </div>
           }
         />
+        <Route path="/pipline" element={<Pipline />} />
+        <Route path="*" element={<HomePage />} />
       </Routes>
     </div>
   )
