@@ -1,6 +1,5 @@
 import heroImage from "../assets/hero.png";
 import aboutImage from "../assets/about.png";
-import { SignedOut } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import messagesIcon from "../assets/icons/messages.png";
 import dashboardIcon from "../assets/icons/dashboard.png";
@@ -12,9 +11,7 @@ import previewImage from "../assets/preview.png";
 import price1 from "../assets/pricing/price1.png";
 import price2 from "../assets/pricing/price2.png";
 import price3 from "../assets/pricing/price3.png";
-import logo from '../assets/logo.png'
-
-
+import logo from "../assets/logo.png";
 import Navbar from "../components/NavBar";
 import TestimonialsCarousel from "../components/TestimonialsCarousel";
 
@@ -72,13 +69,11 @@ const HomePage = () => {
             Strengthen your Client Relationships with Our{" "}
             <span className="text-orange-500"> CRM Solutions</span>
           </h2>
-          <p className="py-3 text-slate-700 max-w-132">
+          <p className="py-3 mb-5 text-slate-700 max-w-132">
             Well we're setting the record straight, this is not just another
             CRM, Its time re-focus on your contacts{" "}
           </p>
-          <SignedOut>
-            <TryForFreeButton />
-          </SignedOut>
+          <TryForFreeButton />
         </div>
         <div>
           <img
@@ -129,7 +124,7 @@ const HomePage = () => {
         </div>
       </section>
       {/* Services */}
-      <section className="mt-10">
+      <section className="mt-10" id="features">
         <p className="text-slate-700 text-center font-semibold">
           What we offer
         </p>
@@ -189,7 +184,7 @@ const HomePage = () => {
         <img src={previewImage} alt="preview image" />
       </section>
       {/* Pricing Plan  */}
-      <section className="">
+      <section id="pricing">
         <h2 className="text-center text-3xl font-extrabold">
           Our <span className="text-orange-500">Pricing Plan</span>
         </h2>
@@ -215,7 +210,6 @@ const HomePage = () => {
       {/* Contact Section */}
       <section className="py-16 mt-16" id="contact">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
           <div>
             <h2 className="text-4xl font-extrabold text-orange-500 mb-6 pb-3">
               Contact Us
@@ -227,8 +221,7 @@ const HomePage = () => {
             </p>
           </div>
 
-          {/* Contact Form */}
-          <div className=" rounded-lg p-8">
+          <div className=" rounded-lg p-8" id="contacts">
             <form className="space-y-6">
               <div>
                 <input
@@ -357,7 +350,7 @@ const HomePage = () => {
             </ul>
           </div>
 
-          {/* Contacts & Support */}
+          {/* Contacts */}
           <div>
             <h4 className="text-lg font-bold text-gray-900 mb-4">
               Contacts & Support
@@ -379,7 +372,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Footer Bottom */}
+        {/* Footer  */}
         <div className="border-t border-gray-200 pt-8 text-center text-slate-600 text-sm">
           <p>&copy; 2024 salesforce maroc. All rights reserved.</p>
         </div>
@@ -392,12 +385,15 @@ export default HomePage;
 
 function TryForFreeButton() {
   const navigate = useNavigate();
+
   return (
-    <button
-      onClick={() => navigate("/sign-in")}
-      className="p-3 px-6 font-semibold bg-orange-500 rounded-md mt-4 text-white cursor-pointer"
-    >
-      Try it For Free
-    </button>
+    <>
+      <button
+        onClick={() => navigate("/dashboard")}
+        className="p-3 px-6 font-semibold bg-orange-500 rounded-md mt-4 text-white cursor-pointer"
+      >
+        Try it For Free
+      </button>
+    </>
   );
 }

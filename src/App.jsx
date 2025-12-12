@@ -1,46 +1,49 @@
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-import { Routes, Route } from 'react-router-dom'
-<<<<<<< HEAD
-import { SignIn } from '@clerk/clerk-react'
-import HomePage from './home/home'
-=======
-import { SignIn, SignUp } from '@clerk/clerk-react'
-import Pipline from "./pipline/pipline"
->>>>>>> 04a2e1cb0bfc7bdbcc0db35d396a077d6f26d6a7
-
+import HomePage from "./home/home";
+import DashboardLayout from "./publicLayout/DashboardLayout";
+import Dashboard from "./pages/Dashboard";
+import Opportunities from "./pages/Opportunities";
+import Pipeline from "./pages/Pipeline";
+import NotFound from "./not-found";
+import { Atom, BlinkBlur } from "react-loading-indicators";
 
 function App() {
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
   return (
+    <>
+      {/* Loading */}
+      {loading && (
+        <div className="fullpage-loader">
+          <BlinkBlur color={['#ff6100']} size="medium" text="Please wait..." textColor="#000000" />
+        </div>
+      )}
+
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route
-          path="/sign-in"
-          element={
-            <div className="min-h-screen flex items-center justify-center ">
-              <div className="w-full max-w-md p-6">
-                <SignIn routing="path" path="/sign-in" />
-              </div>
-            </div>
-          }
-        />
-<<<<<<< HEAD
-        
-=======
-        <Route
-          path="/sign-up"
-          element={
-            <div className="min-h-screen flex items-center justify-center ">
-              <div className="w-full max-w-md p-6">
-                <SignUp routing="path" path="/sign-up" />
-              </div>
-            </div>
-          }
-        />
-        <Route path="/pipline" element={<Pipline />} />
-        <Route path="*" element={<HomePage />} />
->>>>>>> 04a2e1cb0bfc7bdbcc0db35d396a077d6f26d6a7
+        <Route element={<DashboardLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/pipeline" element={<Pipeline />} />
+          <Route path="/opportunities" element={<Opportunities />} />
+          <Route path="/pipline" element={<Pipeline />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;
