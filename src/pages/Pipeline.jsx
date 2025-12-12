@@ -5,7 +5,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { changeStatus } from "../redux/OpportinitySlice";
-
 dayjs.extend(relativeTime);
 
 function Draggable({ oppo }) {
@@ -55,7 +54,7 @@ function Draggable({ oppo }) {
             <path d="M7 3v4" />
             <path d="M3 11h16" />
           </svg>
-          {oppo.date.toLocaleDateString()}
+          {dayjs(oppo.date).format("DD/MM/YYYY")}
         </p>
         <small>
           <svg

@@ -6,7 +6,11 @@ import { useNavigate } from "react-router-dom";
 dayjs.extend(relativeTime);
 
 const Opportunities = () => {
+<<<<<<< HEAD
   const navigate = useNavigate()
+=======
+  const navigate = useNavigate();
+>>>>>>> aff0d4805f0917b675328c6ff897ed484fc36837
   const colorByStage = {
     prospection: "#3b82f6",
     qualification: "#eab308",
@@ -23,7 +27,7 @@ const Opportunities = () => {
           <h1 className="text-3xl font-extrabold text-gray-800">
             💼 Opportunities
           </h1>
-          <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
+          <button onClick={()=>navigate('/addOpportunity')} className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
             + New Opportunity
           </button>
         </div>

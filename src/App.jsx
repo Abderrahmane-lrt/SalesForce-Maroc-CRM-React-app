@@ -9,7 +9,11 @@ import Pipeline from "./pages/Pipeline";
 import NotFound from "./not-found";
 import { Atom, BlinkBlur } from "react-loading-indicators";
 import OpportunitiesSelector from "./opportinities";
+<<<<<<< HEAD
 import OpportunityDetails from "./pages/OpportunityDetails";
+=======
+import AddOpportunity from "./pages/addopportunity";
+>>>>>>> aff0d4805f0917b675328c6ff897ed484fc36837
 
 function App() {
   const location = useLocation();
@@ -48,7 +52,11 @@ function App() {
           <Route path="/pipeline" element={<Pipeline />} />
           <Route path="/opportunities" element={<Opportunities />} />
           <Route path="/pipline" element={<Pipeline />} />
+<<<<<<< HEAD
           <Route path="/opportunities/:id" element={<OpportunityDetails />} />
+=======
+          <Route path="/addOpportunity" element={<AddOpportunity />} />
+>>>>>>> aff0d4805f0917b675328c6ff897ed484fc36837
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
