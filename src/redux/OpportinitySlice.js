@@ -46,15 +46,13 @@ const OportinitySlice = createSlice({
             return { ...state, ...action.payload }
         },
         deleteOpprtinity: () => {
-            // delete code
+            
         },
         changeStatus: (state, action) => {
-            return {
-                ...state.map((oppo) =>
+            return state.map((oppo) =>
                     oppo.entreprise == action.payload.oppId ? { ...oppo, status: action.payload.newStatus } : oppo
                 )
-
-            }
+            
         },
     }
 })

@@ -174,15 +174,15 @@ export default function Pipeline() {
     "gagne",
     "perdu",
   ];
-  const opportinities = useSelector((opportinities) => opportinities);
-  const dispatch = useDispatch()
+  const opportunities = useSelector((state) => state.opportunities);
+  const dispatch = useDispatch();
 
   const handleDragEnd = (event) => {
     const { over, active } = event;
     const oppId = active.id;
-    const newStatus = over.id;
+    const newStatus = over?.id;
     if (over) {
-      dispatch(changeStatus({oppId, newStatus}))
+      dispatch(changeStatus({ oppId, newStatus }));
     } else return;
   };
 
@@ -196,11 +196,11 @@ export default function Pipeline() {
         </h1>
         <hr />
         <div className="columnWrapper">
-          {etape.map((op) => (
+          {etape.map((stage) => (
             <Column
-              key={op}
-              opportinities={opportinities}
-              etape={op}
+              key={stage}
+              opportinities={opportunities.filter((opp) => opp.status === stage)}
+              etape={stage}
             />
           ))}
         </div>

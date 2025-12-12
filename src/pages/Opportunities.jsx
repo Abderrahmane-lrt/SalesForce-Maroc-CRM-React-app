@@ -9,16 +9,16 @@ const stageColor = {
   perdu: "#ef4444",
 };
 
-function StageBadge({ stage }) {
-  const color = stageColor[stage] || "#6b7280";
-  return (
-    <span
-      style={{ background: color + "22", color, padding: '6px 10px', borderRadius: 9999, fontWeight: 700 }}
-    >
-      {stage}
-    </span>
-  );
-}
+// function StageBadge({ stage }) {
+//   const color = stageColor[stage] || "#6b7280";
+//   return (
+//     <span
+//       style={{ background: color + "22", color, padding: '6px 10px', borderRadius: 9999, fontWeight: 700 }}
+//     >
+//       {stage}
+//     </span>
+//   );
+// }
 
 const Opportunities = () => {
   return (

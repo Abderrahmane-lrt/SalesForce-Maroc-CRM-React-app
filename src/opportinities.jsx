@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 
 const OpportunitiesSelector = () => {
-    const opportinities = useSelector(opportinities => opportinities)
-    console.log(JSON.stringify(opportinities));
+    const opportunities = useSelector((state) => state.opportunities);
+    console.log(JSON.stringify(opportunities));
     return ( 
     <ul>
      {
-        opportinities.map((element, index) => <li key={index}>{element.status}</li>)
+        opportunities.map((element, index) => <li key={index}>{element.status}</li>)
      }
     </ul>
 
