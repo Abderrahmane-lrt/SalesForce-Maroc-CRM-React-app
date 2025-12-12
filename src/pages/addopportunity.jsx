@@ -3,18 +3,18 @@ import { addOportinity } from "../redux/OpportinitySlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 export default function AddOpportunity() {
-    const Navigate = useNavigate();
-    const dispatch = useDispatch();
+  const Navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    
+
     dispatch(addOportinity(data));
     Navigate("/pipline");
-    toast.success('New opportunity added.')
+    toast.success("New opportunity added.");
     e.target.reset();
-  }
+  };
   const etape = [
     "prospection",
     "qualification",
@@ -25,8 +25,10 @@ export default function AddOpportunity() {
   ];
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <div >
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">Add Opportunity</h1>
+      <div>
+        <h1 className="text-3xl font-bold text-gray-800 mb-8">
+          Add Opportunity
+        </h1>
         <form className="flex flex-wrap gap-3 my-3" onSubmit={handleSubmit}>
           <div className="flex flex-col  m-1">
             <label htmlFor="entreprise" className="form-label">
@@ -42,8 +44,10 @@ export default function AddOpportunity() {
             />
           </div>
           <div className="m-1 flex flex-col">
-            <label htmlFor="status" className="form-label">stage</label>
-            <select 
+            <label htmlFor="status" className="form-label">
+              stage
+            </label>
+            <select
               name="status"
               className="form-control w-100 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
             >
@@ -144,9 +148,18 @@ export default function AddOpportunity() {
               id="commerciale"
             />
           </div>
-          <button className="bg-orange-500 cursor-pointer hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
-            Add Opportunity
-          </button>
+          <div className="flex gap-4 mt-5">
+            <button className="bg-orange-500 cursor-pointer hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
+              Add Opportunity
+            </button>
+            <button
+              type="button"
+              onClick={() => Navigate(-1)}
+              className="px-6 py-2 border cursor-pointer border-gray-400 rounded-lg font-semibold hover:bg-gray-100 transition"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </div>
