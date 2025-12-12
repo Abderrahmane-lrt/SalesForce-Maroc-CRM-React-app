@@ -12,12 +12,13 @@ import OpportunitiesSelector from "./opportinities";
 import AddOpportunity from "./pages/addopportunity";
 import OpportunityDetails from "./pages/OpportunityDetails";
 import EditOpportunity from "./pages/editopportunity";
+import { Toaster } from "sonner";
 
 function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-    useEffect(() => {
-  if (location.pathname === "/" || location.pathname === '/dashboard') {
+  useEffect(() => {
+    if (location.pathname === "/" || location.pathname === "/dashboard") {
       setLoading(true);
 
       const timer = setTimeout(() => {
@@ -25,8 +26,8 @@ function App() {
       }, 1000);
 
       return () => clearTimeout(timer);
-  }
-    }, [location.pathname]);
+    }
+  }, [location.pathname]);
 
   return (
     <>
@@ -42,6 +43,13 @@ function App() {
         </div>
       )}
 
+      {/* Toaste Notifications */}
+      <div className="absolute">
+
+      <Toaster richColors position="top-right" />
+      </div>
+
+      {/* Routes */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/test" element={<OpportunitiesSelector />} />
@@ -50,7 +58,10 @@ function App() {
           <Route path="/pipeline" element={<Pipeline />} />
           <Route path="/opportunities" element={<Opportunities />} />
           <Route path="/pipline" element={<Pipeline />} />
-          <Route path="/opportunities/:id" element={<OpportunityDetails />}></Route>
+          <Route
+            path="/opportunities/:id"
+            element={<OpportunityDetails />}
+          ></Route>
           <Route path="/editOpportunity/:id" element={<EditOpportunity />} />
           <Route path="/addOpportunity" element={<AddOpportunity />} />
         </Route>

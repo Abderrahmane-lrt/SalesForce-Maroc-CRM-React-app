@@ -187,12 +187,12 @@ export default function Pipeline() {
   return (
     <div className="piplineContainer">
       <DndContext onDragEnd={handleDragEnd}>
-        <h1 className="pb-6">
+        <h1 className="pb-3">
           <span className="text-3xl font-extrabold text-gray-800 ">
-            📋 Pipeline Kanban
+             Pipeline Kanban
           </span>
         </h1>
-        <hr />
+        <hr   className="bg-slate-200 "/>
         <div className="columnWrapper">
           {etape.map((stage) => (
             <Column

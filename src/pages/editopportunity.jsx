@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { editOpprtinity } from "../redux/OpportinitySlice";
+import { toast } from "sonner";
 
 export default function EditOpportunity() {
   const { id } = useParams();
@@ -24,17 +25,20 @@ export default function EditOpportunity() {
 
   useEffect(() => {
     if (opp) {
-      setForm({
-        entreprise: opp.entreprise,
-        status: opp.status || "prospection",
-        telephone: opp.telephone ,
-        email: opp.email ,
-        montant: opp.montant ,
-        probability: opp.probabilite ,
-        endDate: opp.date ? new Date(opp.date).toISOString().slice(0, 10) : "",
-        Source: opp.source ,
-        commerciale: opp.commerciale ,
-      });
+      const timer = setTimeout(() => {
+        setForm({
+          entreprise: opp.entreprise,
+          status: opp.status || "prospection",
+          telephone: opp.telephone ,
+          email: opp.email ,
+          montant: opp.montant ,
+          probability: opp.probabilite ,
+          endDate: opp.date ? new Date(opp.date).toISOString().slice(0, 10) : "",
+          Source: opp.source ,
+          commerciale: opp.commerciale ,
+        });
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [opp]);
 
@@ -54,9 +58,16 @@ export default function EditOpportunity() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    
+    if (!form.entreprise || !form.telephone || !form.email || !form.montant || !form.probability || !form.endDate || !form.Source) {
+      toast.error('Please fill in all required fields');
+      return;
+    }
+    
     const payload = { id: Number(id), ...form };
     dispatch(editOpprtinity(payload));
-    navigate(-1);
+    toast.success('Opportunity updated successfully.');
+    navigate(`/opportunities/${id}`);
   }
 
   if (!opp) return <div className="p-6">Opportunity not found.</div>;

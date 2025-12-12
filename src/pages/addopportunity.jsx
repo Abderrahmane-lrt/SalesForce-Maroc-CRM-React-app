@@ -1,17 +1,18 @@
 import { useDispatch } from "react-redux";
 import { addOportinity } from "../redux/OpportinitySlice";
-import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 export default function AddOpportunity() {
     const Navigate = useNavigate();
     const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success("Opportunity added successfully");
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+    
     dispatch(addOportinity(data));
     Navigate("/pipline");
+    toast.success('New opportunity added.')
     e.target.reset();
   }
   const etape = [
@@ -25,7 +26,7 @@ export default function AddOpportunity() {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div >
-        <h1>Add Opportunity</h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-8">Add Opportunity</h1>
         <form className="flex flex-wrap gap-3 my-3" onSubmit={handleSubmit}>
           <div className="flex flex-col  m-1">
             <label htmlFor="entreprise" className="form-label">
@@ -37,11 +38,12 @@ export default function AddOpportunity() {
               placeholder="Entreprise"
               name="entreprise"
               id="entreprise"
+              required
             />
           </div>
           <div className="m-1 flex flex-col">
             <label htmlFor="status" className="form-label">stage</label>
-            <select
+            <select 
               name="status"
               className="form-control w-100 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
             >
@@ -62,6 +64,7 @@ export default function AddOpportunity() {
               placeholder="telephone"
               name="telephone"
               id="telephone"
+              required
             />
           </div>
           <div className="flex flex-col m-1">
@@ -74,6 +77,7 @@ export default function AddOpportunity() {
               placeholder="email"
               name="email"
               id="email"
+              required
             />
           </div>
           <div className="flex flex-col m-1">
@@ -86,6 +90,7 @@ export default function AddOpportunity() {
               placeholder="montant"
               name="montant"
               id="montant"
+              required
             />
           </div>
           <div className="flex flex-col m-1">
@@ -98,6 +103,7 @@ export default function AddOpportunity() {
               placeholder="probability"
               name="probability"
               id="probability"
+              required
             />
           </div>
           <div className="flex flex-col m-1">
@@ -110,6 +116,7 @@ export default function AddOpportunity() {
               placeholder="endDate"
               name="endDate"
               id="endDate"
+              required
             />
           </div>
           <div className="flex flex-col m-1">
@@ -122,6 +129,7 @@ export default function AddOpportunity() {
               placeholder="Source"
               name="Source"
               id="Source"
+              required
             />
           </div>
           <div className="flex flex-col m-1">
@@ -136,7 +144,7 @@ export default function AddOpportunity() {
               id="commerciale"
             />
           </div>
-          <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
+          <button className="bg-orange-500 cursor-pointer hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
             Add Opportunity
           </button>
         </form>

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 dayjs.extend(relativeTime);
 
 const Opportunities = () => {
@@ -22,7 +23,7 @@ const Opportunities = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-12">
           <h1 className="text-3xl font-extrabold text-gray-800">
-            💼 Opportunities
+             Opportunities
           </h1>
           <button onClick={()=>navigate('/addOpportunity')} className="bg-orange-500 cursor-pointer hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
             + New Opportunity
@@ -92,6 +93,7 @@ const Opportunities = () => {
                         onClick={() => {
                           if (window.confirm(`Delete opportunity "${item.entreprise}"?`)) {
                             dispatch({ type: 'opportinities/deleteOpprtinity', payload: item.id });
+                            toast.success('Opportunity deleted.')
                           }
                         }}
                       >
@@ -110,3 +112,4 @@ const Opportunities = () => {
 };
 
 export default Opportunities;
+

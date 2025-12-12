@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 const OpportunityDetails = () => {
-  const opportunities = useSelector((state) => state.opportunities);
+  const opportunities = useSelector((state) => state.opportunities || []);
   const navigate = useNavigate();
   const { id } = useParams();
-  const opportunity = opportunities.find((item) => item.id == parseInt(id));
+  const opportunity = opportunities.find((item) => Number(item.id) === Number(id));
   const colorByStage = {
     prospection: "#3b82f6",
     qualification: "#eab308",
@@ -26,7 +26,7 @@ const OpportunityDetails = () => {
             <div className="p-4">
               <button
                 className=" hover:bg-red-500 cursor-pointer py-2 px-6  hover:text-white text-md font-monospace font-semibold "
-                onClick={() => navigate(-1)}
+                onClick={() => navigate('/opportunities')}
               >
                 ⟵ Back
               </button>
@@ -51,7 +51,7 @@ const OpportunityDetails = () => {
           <div className="p-4">
             <button
               className=" hover:bg-red-500 cursor-pointer py-2 px-6  hover:text-white text-md font-monospace font-semibold "
-              onClick={() => navigate(-1)}
+              onClick={() => navigate('/opportunities')}
             >
               ⟵ Back
             </button>
@@ -132,11 +132,19 @@ const OpportunityDetails = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div>
                   <span className="text-slate-600 font-semibold">Created at</span>
-                  <h2 className="py-2">{opportunity.date}</h2>
+                  <h2 className="py-2">
+                    {opportunity.date 
+                      ? new Date(opportunity.date).toLocaleDateString() 
+                      : 'N/A'}
+                  </h2>
                 </div>
                 <div>
                   <span className="text-slate-600 font-semibold ">Expected Close </span>
-                  <h2 className="py-2">{opportunity.date}</h2>
+                  <h2 className="py-2">
+                    {opportunity.date 
+                      ? new Date(opportunity.date).toLocaleDateString() 
+                      : 'N/A'}
+                  </h2>
                 </div>
 
               </div>
