@@ -86,7 +86,7 @@ const Dashboard = () => {
             <h3 className="text-lg font-semibold capitalize text-gray-700 mb-2">
               Conversion Rate
             </h3>
-            {/* here */}
+
             
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
