@@ -57,8 +57,10 @@ const Dashboard = () => {
       .filter((opp) => opp.status === 'gagne')
       .reduce((sum, opp) => sum + Number(opp.montant || 0), 0);
   };
-
-  
+  const ConversionRate = ()=>{
+    const total = opportunities.filter((opp) => opp.status === 'gagne').length;
+    return ((total/opportunities.length)*100).toFixed(2)
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -87,6 +89,17 @@ const Dashboard = () => {
               Conversion Rate
             </h3>
             {/* here */}
+            <div style={{
+              display:"flex",
+              justifyContent:'center',
+              width:80,
+              height:70,
+              padding:20,
+              borderRadius:'50%',
+              border:'4px solid orange'
+            }}>
+              {ConversionRate()}% 
+            </div>
             
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
@@ -170,7 +183,6 @@ const Dashboard = () => {
               <XAxis dataKey="date" />
               <YAxis allowDecimals={false} />
               <Tooltip />
-
               <Line
                 type="monotone"
                 dataKey="count"
