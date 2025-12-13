@@ -26,12 +26,12 @@ const Dashboard = () => {
     perdu: "#ef4444",
   };
   const data = [
-    { stage: "prospection", value: 12 },
-    { stage: "qualification", value: 8 },
-    { stage: "proposition", value: 5 },
-    { stage: "negotiation", value: 3 },
-    { stage: "gagne", value: 5 },
-    { stage: "perdu", value: 2 },
+    { stage: "prospection", opportunities: opportunities.filter((o) => o.status === "prospection").length},
+    { stage: "qualification", opportunities: opportunities.filter((o) => o.status === "qualification").length},
+    { stage: "proposition", opportunities: opportunities.filter((o) => o.status === "proposition").length},
+    { stage: "negotiation", opportunities: opportunities.filter((o) => o.status === "negotiation").length},
+    { stage: "gagne", opportunities: opportunities.filter((o) => o.status === "gagne").length},
+    { stage: "perdu", opportunities: opportunities.filter((o) => o.status === "perdu").length},
   ];
   const winLossData = [
     {
@@ -143,7 +143,7 @@ const Dashboard = () => {
             <YAxis />
             <Tooltip />
 
-            <Bar dataKey="value" radius={[6, 6, 0, 0]}>
+            <Bar dataKey="opportunities" radius={[6, 6, 0, 0]}>
               {data.map((element, index) => (
                 <Cell
                   key={`cell-${index}`}

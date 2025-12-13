@@ -60,7 +60,7 @@ const OportinitySlice = createSlice({
                 ...rest,
                 id: state.length + 1,
                 probabilite: probability || "",
-                date: endDate ? new Date(endDate) : new Date(),
+                date: endDate|| new Date().toISOString(),
                 source: Source || "",
             };
             state.push(newOpp);

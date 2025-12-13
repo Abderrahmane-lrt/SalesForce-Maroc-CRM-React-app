@@ -8,12 +8,16 @@ import { changeStatus } from "../redux/OpportinitySlice";
 dayjs.extend(relativeTime);
 
 function Draggable({ oppo }) {
+  const isExpired =
+    !["gagne", "perdu"].includes(oppo.status) &&
+    dayjs(oppo.date).endOf("day").isBefore(dayjs());
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: oppo.id,
   });
   const dragStyle = {
     cursor: "move",
     transform: transform && `translate(${transform.x}px, ${transform.y}px)`,
+      border : isExpired && '2px solid red'
   };
   return (
     <div
@@ -21,8 +25,11 @@ function Draggable({ oppo }) {
       {...listeners}
       ref={setNodeRef}
       style={dragStyle}
-      className="draggable border border-slate-200"
+      className={`draggable border border-slate-200`}
     >
+      {isExpired && (
+        <span className="text-red-600 text-xs font-bold">⚠ Deal expired</span>
+      )}
       <span className="titleAndprice">
         <h2 className="capitalize font-semibold">{oppo.entreprise}</h2>
         <b className="montant">
@@ -30,7 +37,7 @@ function Draggable({ oppo }) {
         </b>
       </span>
       <div className="meta">
-        <span className="prob">{oppo.probabilite || "—"}%</span>
+        <span className="prob">Win: {oppo.probabilite || "—"}%</span>
       </div>
       <div className="date">
         <p>
@@ -156,7 +163,12 @@ function Column({ opportinities, etape, total }) {
     >
       <div className="flex justify-between items-center pb-2">
         <h1 style={{ color: colorByStage[etape] }}>{etape}</h1>
-        <span style={{ color: colorByStage[etape] }} className="pb-2 capitalize font-bold px-3 rounded-lg">total: {total} DH</span>
+        <span
+          style={{ color: colorByStage[etape] }}
+          className="pb-2 capitalize font-bold px-3 rounded-lg"
+        >
+          total: {total} DH
+        </span>
       </div>
       <div className="columnInner" ref={setNodeRef}>
         {opportinities.map((op) => (
@@ -181,9 +193,7 @@ export default function Pipeline() {
   const handleDragEnd = (event) => {
     const { over, active } = event;
     const oppId = active.id;
-    console.log(oppId);
     const newStatus = over?.id;
-    console.log(newStatus);
     if (over) {
       dispatch(changeStatus({ oppId, newStatus }));
     } else return;

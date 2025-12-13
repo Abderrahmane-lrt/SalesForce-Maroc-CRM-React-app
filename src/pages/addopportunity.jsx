@@ -2,9 +2,24 @@ import { useDispatch } from "react-redux";
 import { addOportinity } from "../redux/OpportinitySlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useEffect, useState } from "react";
 export default function AddOpportunity() {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
+  const [montantPondere, setMontantPondere] = useState(0);
+  const [calcul, setCalcul] = useState({
+    montant: 0,
+    probability: 0,
+  });
+  const handleCalcul = (e) => {
+    setCalcul({...calcul,
+      [e.target.name]: e.target.value,
+    });
+  };
+  useEffect(()=>{
+    setMontantPondere(Math.round(calcul.montant * (calcul.probability / 100)));
+  },[calcul])
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -104,7 +119,9 @@ export default function AddOpportunity() {
               type="number"
               className="form-control  px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding focus:border-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
               name="montant"
+              value={calcul.montant}
               id="montant"
+               onChange={handleCalcul}
               required
             />
           </div>
@@ -115,7 +132,9 @@ export default function AddOpportunity() {
             <input
               type="number"
               className="form-control px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding focus:border-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-              name="probability"
+              name="probability" 
+              value={calcul.probability}
+              onChange={handleCalcul}
               id="probability"
               required
             />
@@ -166,6 +185,9 @@ export default function AddOpportunity() {
             >
               Cancel
             </button>
+          </div>
+          <div className="mt-7 " >
+            <p style={{fontSize:"1.2rem",fontWeight:'500'}}>montant Pondere : <b>{montantPondere} DH</b></p>
           </div>
         </form>
       </div>
