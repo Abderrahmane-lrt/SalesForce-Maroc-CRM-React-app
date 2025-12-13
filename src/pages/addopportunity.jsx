@@ -9,8 +9,11 @@ export default function AddOpportunity() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-
-    dispatch(addOportinity(data));
+    const finaldata = {
+      ...data,
+      montantPondere: Math.round(data.montant * (data.probability / 100)),
+    }
+    dispatch(addOportinity(finaldata));
     Navigate("/pipline");
     toast.success("New opportunity added.");
     e.target.reset();

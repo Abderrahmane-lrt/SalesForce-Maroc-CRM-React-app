@@ -10,10 +10,11 @@ const data = [
         email: "test@gmail.com",
         contact: 'John Paul',
         montant: 10000,
-        probabilite: "60",
+        probabilite: 60,
         date: new Date(),
         source: "website",
         commerciale: "",
+        montantPondere : (1000)*(60/100)
     },
     {
         id:2,
@@ -27,6 +28,7 @@ const data = [
         date: new Date(),
         source: "website",
         commerciale: "",
+        montantPondere : (1000)*(60/100)
     },
     {
         id:3,
@@ -40,6 +42,7 @@ const data = [
         date: new Date(),
         source: "website",
         commerciale: "",
+        montantPondere : (1000)*(60/100)
     },
 ]
 const opportunities = localStorage.getItem('opportunities') ? JSON.parse(localStorage.getItem('opportunities')) : data;
