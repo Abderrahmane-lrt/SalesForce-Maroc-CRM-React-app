@@ -14,6 +14,7 @@ import OpportunityDetails from "./pages/OpportunityDetails";
 import EditOpportunity from "./pages/editopportunity";
 import { Toaster } from "sonner";
 
+
 function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);

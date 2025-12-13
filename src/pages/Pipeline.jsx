@@ -138,7 +138,7 @@ function Draggable({ oppo }) {
     </div>
   );
 }
-function Column({ opportinities, etape }) {
+function Column({ opportinities, etape, total }) {
   const { setNodeRef } = useDroppable({ id: etape });
   const colorByStage = {
     prospection: "#3b82f6",
@@ -154,7 +154,10 @@ function Column({ opportinities, etape }) {
       className="column"
       style={{ borderTop: "9px solid " + colorByStage[etape] }}
     >
-      <h1 style={{ color: colorByStage[etape] }}>{etape}</h1>
+      <div className="flex justify-between items-center pb-2">
+        <h1 style={{ color: colorByStage[etape] }}>{etape}</h1>
+        <span style={{ color: colorByStage[etape] }} className="pb-2 capitalize font-bold px-3 rounded-lg">total: {total} DH</span>
+      </div>
       <div className="columnInner" ref={setNodeRef}>
         {opportinities.map((op) => (
           <Draggable key={op.id} oppo={op} />
@@ -185,21 +188,29 @@ export default function Pipeline() {
       dispatch(changeStatus({ oppId, newStatus }));
     } else return;
   };
+  const totalPrice = (stage) => {
+    return opportunities
+      .filter((opp) => opp.status === stage)
+      .reduce((sum, opp) => sum + Number(opp.montant || 0), 0);
+  };
 
   return (
     <div className="piplineContainer">
       <DndContext onDragEnd={handleDragEnd}>
         <h1 className="pb-3">
           <span className="text-3xl font-extrabold text-gray-800 ">
-             Pipeline Kanban
+            Pipeline Kanban
           </span>
         </h1>
-        <hr   className="bg-slate-200 "/>
+        <hr className="bg-slate-200 " />
         <div className="columnWrapper">
           {etape.map((stage) => (
             <Column
               key={stage}
-              opportinities={opportunities.filter((opp) => opp.status === stage)}
+              opportinities={opportunities.filter(
+                (opp) => opp.status === stage
+              )}
+              total={totalPrice(stage)}
               etape={stage}
             />
           ))}

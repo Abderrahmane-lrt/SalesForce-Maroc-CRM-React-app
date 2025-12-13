@@ -52,6 +52,13 @@ const Dashboard = () => {
       return acc;
     }, {})
   ).map(([date, count]) => ({ date, count }));
+  const TotalRevenu = ()=>{
+    return opportunities
+      .filter((opp) => opp.status === 'gagne')
+      .reduce((sum, opp) => sum + Number(opp.montant || 0), 0);
+  };
+
+  
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -72,20 +79,21 @@ const Dashboard = () => {
               Total Opportunities
             </h3>
             <p className="text-3xl font-bold text-orange-500">
-              {opportunities.length}
+              {opportunities.length} 
             </p>
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">
-              Active Deals
+            <h3 className="text-lg font-semibold capitalize text-gray-700 mb-2">
+              Conversion Rate
             </h3>
-            <p className="text-3xl font-bold text-green-500">2</p>
+            {/* here */}
+            
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
             <h3 className="text-lg font-semibold text-gray-700 mb-2">
-              Revenue
+              Outcome
             </h3>
-            <p className="text-3xl font-bold text-blue-500">50000 MAD</p>
+            <p className="text-3xl font-bold text-black">{TotalRevenu()} DH</p>
           </div>
         </div>
         <div className="my-8 bg-white rounded-lg shadow-md p-6">
