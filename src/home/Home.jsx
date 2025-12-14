@@ -61,7 +61,7 @@ const HomePage = () => {
       <Navbar />
       {/* Hero */}
       <section className="flex justify-between pt-10">
-        <div className="pt-20">
+        <div className="pt-16">
           <h2
             style={{ lineHeight: 1.4 }}
             className="text-3xl lg:text-4xl font-bold tracking-wide max-w-162"
