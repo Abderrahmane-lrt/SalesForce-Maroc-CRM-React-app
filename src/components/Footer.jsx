@@ -6,8 +6,8 @@ const Footer = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         {/* Company Info */}
         <div>
-          <div className="object-fit-contain pt-4">
-            <img src={logo} alt="Logo" width={160} height={200} />
+          <div className="object-fit-contain pt-1">
+            <img src={logo} alt="Logo" width={45} height={45} className='rounded-lg' />
           </div>
           <p className="text-slate-600 text-sm my-4">
             2131 E Monument Ebridge <br />

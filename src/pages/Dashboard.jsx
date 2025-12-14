@@ -1,4 +1,7 @@
 import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { useAuth, useUser } from "@clerk/clerk-react";
+import { toast } from "sonner";
 import {
   BarChart,
   Bar,
@@ -16,6 +19,25 @@ import {
 
 const Dashboard = () => {
   const opportunities = useSelector((state) => state.opportunities);
+  const { isSignedIn, isLoaded } = useAuth();
+  const {user} = useUser()
+  const hasShownWelcomeToast = useRef(false);
+
+  useEffect(() => {
+    if (isLoaded && isSignedIn && !hasShownWelcomeToast.current) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const justSignedIn = urlParams.get("signed_in") === "true" || 
+                          sessionStorage.getItem("justSignedIn") === "true"; 
+      if (justSignedIn) {
+        toast.success("Welcome! You have successfully signed in.");
+        if (urlParams.get("signed_in") === "true") {
+          window.history.replaceState({}, "", "/dashboard");
+        }
+        sessionStorage.removeItem("justSignedIn");
+        hasShownWelcomeToast.current = true;
+      }
+    }
+  }, [isLoaded, isSignedIn]);
   const lastOpportunity = opportunities.at(-1);
   const colorByStage = {
     prospection: "#3b82f6",
@@ -65,9 +87,13 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
+        <div className="flex justify-between">
+
         <h1 className="text-3xl font-extrabold text-gray-800 mb-6">
-          Dashboard
+          Dashboard 
         </h1>
+      <h2 className="py-2 text-gray-500 ">Welcome back, {user.firstName}  👋</h2>
+        </div>
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
           <p className="text-blue-800 font-medium">
            This dashboard gives you a real-time overview of your sales

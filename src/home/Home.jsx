@@ -11,7 +11,6 @@ import previewImage from "../assets/preview.png";
 import price1 from "../assets/pricing/price1.png";
 import price2 from "../assets/pricing/price2.png";
 import price3 from "../assets/pricing/price3.png";
-import logo from "../assets/logo.png";
 import Navbar from "../components/NavBar";
 import TestimonialsCarousel from "../components/TestimonialsCarousel";
 import Footer from "../components/Footer";
@@ -282,7 +281,7 @@ function TryForFreeButton() {
   return (
     <>
       <button
-        onClick={() => navigate("/dashboard")}
+        onClick={() => navigate("/sign-in")}
         className="p-3 px-6 font-semibold bg-orange-500 rounded-md mt-4 text-white cursor-pointer"
       >
         Try it For Free
