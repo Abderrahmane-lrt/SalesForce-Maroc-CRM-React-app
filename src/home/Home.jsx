@@ -7,7 +7,7 @@ import tasksIcon from "../assets/icons/tasks.png";
 import calendarIcon from "../assets/icons/calendar.png";
 import assignIcon from "../assets/icons/assign.png";
 import contactsIcon from "../assets/icons/contacts.png";
-import previewImage from "../assets/preview.png";
+import homeImage from "../assets/home.png"
 import price1 from "../assets/pricing/price1.png";
 import price2 from "../assets/pricing/price2.png";
 import price3 from "../assets/pricing/price3.png";
@@ -181,7 +181,7 @@ const HomePage = () => {
         <h2 className=" text-2xl text-white font-extrabold text-center pt-20 pb-5">
           Easy and convenient
         </h2>
-        <img src={previewImage} alt="preview image" />
+        <img src={homeImage} alt="preview image" />
       </section>
       {/* Pricing Plan  */}
       <section id="pricing">
