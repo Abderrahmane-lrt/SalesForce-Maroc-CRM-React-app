@@ -7,7 +7,6 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 import Sidebar from "../components/SideBar";
-import logo from "../assets/logo.png";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -33,12 +32,6 @@ const DashboardLayout = () => {
                     {isSidebarOpen ? "menu_open" : "menu"}
                   </span>
                 </button>
-                <img
-                  src={logo}
-                  alt=""
-                  width={32}
-                  className="rounded-md"
-                />
               </div>
               <div className="flex items-center">
                 <UserButton
