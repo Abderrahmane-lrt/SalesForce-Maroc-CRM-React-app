@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useClerk } from "@clerk/clerk-react";
 import { toast } from "sonner";
+import logo from "../assets/logo.png";
 
 const Sidebar = ({ isOpen, onToggle }) => {
   const { signOut } = useClerk();
@@ -18,13 +19,22 @@ const Sidebar = ({ isOpen, onToggle }) => {
 
   return (
     <aside
-      className={`bg-gray-900 text-white flex flex-col gap-6 min-h-screen pt-25 transition-all duration-300 ease-in-out ${
+      className={`bg-gray-900 text-white flex flex-col gap-6 min-h-screen pt-6 transition-all duration-300 ease-in-out ${
         isOpen ? "w-64 p-6" : "w-0 p-0 overflow-hidden"
       }`}
     >
+      <div className={`flex items-center gap-3 pb-4 ${!isOpen ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}>
+        <img
+          src={logo}
+          alt="Logo"
+          width={40}
+          height={40}
+          className="rounded-md"
+        />
+        {isOpen && <span className="text-lg font-bold text-white">SalesForce CRM</span>}
+      </div>
 
-
-      <nav className={`flex flex-col gap-4 flex-1 border-t-blue-50 ${!isOpen ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}>
+      <nav className={`flex flex-col gap-4 flex-1 border-t border-gray-700 pt-4 ${!isOpen ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}>
         <NavLink
           to="/dashboard"
           className={({ isActive }) =>
