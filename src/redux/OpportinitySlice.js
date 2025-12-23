@@ -42,7 +42,49 @@ const data = [
         date: new Date(),
         source: "website",
         commerciale: "",
-        montantPondere : (1000)*(60/100)
+        montantPondere : (30000)*(60/100)
+    },
+    {
+        id:4,
+        entreprise: "Dell",
+        status: "proposition",
+        telephone: "0523434343",
+        email: "test@gmail.com",
+        contact: 'hmed Paul',
+        montant: 40000,
+        probabilite: "30",
+        date: new Date(),
+        source: "website",
+        commerciale: "",
+        montantPondere : (40000)*(30/100)
+    },
+    {
+        id:5,
+        entreprise: "Microsoft",
+        status: "negotiation",
+        telephone: "0523434343",
+        email: "test@gmail.com",
+        contact: 'John Paul',
+        montant: 30000,
+        probabilite: "30",
+        date: new Date(),
+        source: "website",
+        commerciale: "",
+        montantPondere : (1000)*(30/100)
+    },
+    {
+        id:6,
+        entreprise: "ofppt",
+        status: "gagne",
+        telephone: "0523434343",
+        email: "test@gmail.com",
+        contact: 'John Paul',
+        montant: 30000,
+        probabilite: "30",
+        date: new Date(),
+        source: "website",
+        commerciale: "",
+        montantPondere : (30000)*(60/100)
     },
 ]
 const opportunities = localStorage.getItem('opportunities') ? JSON.parse(localStorage.getItem('opportunities')) : data;
