@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "sonner";
 import {
@@ -22,12 +22,7 @@ const Dashboard = () => {
   const { isSignedIn, isLoaded } = useAuth();
   const { user } = useUser();
   const hasShownWelcomeToast = useRef(false);
-  const [afficher, setAfficher] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setAfficher(false);
-    }, 3000);
-  }, []);
+
 
   useEffect(() => {
     if (isLoaded && isSignedIn && !hasShownWelcomeToast.current) {
@@ -120,11 +115,11 @@ const Dashboard = () => {
           <h1 className="text-3xl font-extrabold text-gray-800 mb-6">
             Dashboard
           </h1>
-          {afficher && (
+      
             <h2 className="py-2 text-gray-500 ">
               Welcome back, {user.firstName} 👋
             </h2>
-          )}{" "}
+     
         </div>
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
           <p className="text-blue-800 font-medium">
