@@ -20,14 +20,16 @@ import {
 const Dashboard = () => {
   const opportunities = useSelector((state) => state.opportunities);
   const { isSignedIn, isLoaded } = useAuth();
-  const {user} = useUser()
+  const { user } = useUser();
   const hasShownWelcomeToast = useRef(false);
+
 
   useEffect(() => {
     if (isLoaded && isSignedIn && !hasShownWelcomeToast.current) {
       const urlParams = new URLSearchParams(window.location.search);
-      const justSignedIn = urlParams.get("signed_in") === "true" || 
-                          sessionStorage.getItem("justSignedIn") === "true"; 
+      const justSignedIn =
+        urlParams.get("signed_in") === "true" ||
+        sessionStorage.getItem("justSignedIn") === "true";
       if (justSignedIn) {
         toast.success("Welcome! You have successfully signed in.");
         if (urlParams.get("signed_in") === "true") {
@@ -48,12 +50,34 @@ const Dashboard = () => {
     perdu: "#ef4444",
   };
   const data = [
-    { stage: "prospection", opportunities: opportunities.filter((o) => o.status === "prospection").length},
-    { stage: "qualification", opportunities: opportunities.filter((o) => o.status === "qualification").length},
-    { stage: "proposition", opportunities: opportunities.filter((o) => o.status === "proposition").length},
-    { stage: "negotiation", opportunities: opportunities.filter((o) => o.status === "negotiation").length},
-    { stage: "gagne", opportunities: opportunities.filter((o) => o.status === "gagne").length},
-    { stage: "perdu", opportunities: opportunities.filter((o) => o.status === "perdu").length},
+    {
+      stage: "prospection",
+      opportunities: opportunities.filter((o) => o.status === "prospection")
+        .length,
+    },
+    {
+      stage: "qualification",
+      opportunities: opportunities.filter((o) => o.status === "qualification")
+        .length,
+    },
+    {
+      stage: "proposition",
+      opportunities: opportunities.filter((o) => o.status === "proposition")
+        .length,
+    },
+    {
+      stage: "negotiation",
+      opportunities: opportunities.filter((o) => o.status === "negotiation")
+        .length,
+    },
+    {
+      stage: "gagne",
+      opportunities: opportunities.filter((o) => o.status === "gagne").length,
+    },
+    {
+      stage: "perdu",
+      opportunities: opportunities.filter((o) => o.status === "perdu").length,
+    },
   ];
   const winLossData = [
     {
@@ -74,29 +98,32 @@ const Dashboard = () => {
       return acc;
     }, {})
   ).map(([date, count]) => ({ date, count }));
-  const TotalRevenu = ()=>{
+  const TotalRevenu = () => {
     return opportunities
-      .filter((opp) => opp.status === 'gagne')
+      .filter((opp) => opp.status === "gagne")
       .reduce((sum, opp) => sum + Number(opp.montant || 0), 0);
   };
-  const ConversionRate = ()=>{
-    const total = opportunities.filter((opp) => opp.status === 'gagne').length;
-    return ((total/opportunities.length)*100).toFixed(2)
-  }
+  const ConversionRate = () => {
+    const total = opportunities.filter((opp) => opp.status === "gagne").length;
+    return ((total / opportunities.length) * 100).toFixed(2);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between">
-
-        <h1 className="text-3xl font-extrabold text-gray-800 mb-6">
-          Dashboard 
-        </h1>
-      <h2 className="py-2 text-gray-500 ">Welcome back, {user.firstName}  👋</h2>
+          <h1 className="text-3xl font-extrabold text-gray-800 mb-6">
+            Dashboard
+          </h1>
+      
+            <h2 className="py-2 text-gray-500 ">
+              Welcome back, {user.firstName} 👋
+            </h2>
+     
         </div>
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
           <p className="text-blue-800 font-medium">
-           This dashboard gives you a real-time overview of your sales
+            This dashboard gives you a real-time overview of your sales
             pipeline, performance trends, and deal outcomes.
           </p>
         </div>
@@ -107,33 +134,36 @@ const Dashboard = () => {
               Total Opportunities
             </h3>
             <p className="text-3xl font-bold text-orange-500 pt-3">
-              {opportunities.length} 
+              {opportunities.length}
             </p>
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
             <h3 className="text-lg font-semibold capitalize text-gray-700 mb-2">
               Conversion Rate
             </h3>
-            <div style={{
-              display:"flex",
-              justifyContent:'center',
-              alignItems : 'center',
-              width:80,
-              height:80,
-              padding:20,
-              borderRadius:'50%',
-              border:'4px solid orange',
-              marginLeft : '8px' ,
-            }}>
-              {ConversionRate()}% 
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: 80,
+                height: 80,
+                padding: 20,
+                borderRadius: "50%",
+                border: "4px solid orange",
+                marginLeft: "8px",
+              }}
+            >
+              {ConversionRate()}%
             </div>
-            
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
             <h3 className="text-lg font-semibold text-gray-700 mb-2">
               Outcome
             </h3>
-            <p className="text-3xl font-bold text-black pt-3">{TotalRevenu()} DH</p>
+            <p className="text-3xl font-bold text-black pt-3">
+              {TotalRevenu()} DH
+            </p>
           </div>
         </div>
         <div className="my-8 bg-white rounded-lg shadow-md p-6">
